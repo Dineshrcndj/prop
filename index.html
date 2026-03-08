@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 will you be mine · proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fad0c4 0%, #ffd1d1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            transition: background 0.3s ease;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(130deg, #d64b6b, #b32e5a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 10px rgba(255, 120, 160, 0.2);
+        }
+        .subhead {
+            font-size: 1.2rem;
+            color: #6b3b4b;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        label {
+            font-weight: 600;
+            color: #802d4a;
+            font-size: 1.2rem;
+            letter-spacing: -0.2px;
+            text-align: left;
+            margin-left: 8px;
+        }
+        input {
+            background: rgba(255,255,240,0.8);
+            border: 2px solid #ffb3c6;
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
+            font-size: 1.2rem;
+            outline: none;
+            transition: 0.15s;
+            color: #351c24;
+            font-weight: 500;
+        }
+        input:focus {
+            border-color: #ff5e8a;
+            box-shadow: 0 0 0 5px rgba(255,94,138,0.2);
+            background: #fff9fb;
+        }
+        .btn {
+            background: #ff5e8a;
+            border: none;
+            border-radius: 60px;
+            padding: 1rem 2rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 14px #ffb0c3;
+            transition: transform 0.1s, box-shadow 0.2s;
+            border: 2px solid white;
+            letter-spacing: 0.5px;
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+        .link-area {
+            margin-top: 1.5rem;
+            word-break: break-all;
+            background: #ffecf0;
+            padding: 1rem;
+            border-radius: 40px;
+            border: 2px dashed #ff94b2;
+        }
+        .link-area a {
+            color: #b32e5a;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .link-area a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+        .heart {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            filter: drop-shadow(0 6px 6px #fbaaba);
+        }
+        /* proposal page specific */
+        .proposal-box {
+            text-align: center;
+        }
+        .big-question {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #a52d55;
+            margin: 0.5rem 0 2rem 0;
+            text-shadow: 2px 2px 0 white;
+        }
+        .name-highlight {
+            background: white;
+            padding: 0.2rem 1.2rem;
+            border-radius: 100px;
+            display: inline-block;
+            box-shadow: 0 4px 0 #ffb8cf;
+            font-size: 2rem;
+            margin-top: 8px;
+        }
+        .button-pair {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0 1rem;
+            position: relative;
+            min-height: 140px;
+        }
+        .btn-yes {
+            background: #2fb87e;
+            box-shadow: 0 10px 0 #1a6d48, 0 8px 20px #b4ffcf;
+            font-size: 2rem;
+            padding: 1rem 2.8rem;
+            border: 3px solid white;
+            transition: 0.1s;
+            z-index: 10;
+        }
+        .btn-no {
+            background: #444;
+            box-shadow: 0 10px 0 #222, 0 8px 20px #ccc;
+            font-size: 2rem;
+            padding: 1rem 2.8rem;
+            border: 3px solid #eee;
+            transition: all 0.08s ease;
+            position: relative;
+            cursor: default;
+            z-index: 20;
+            /* will be moved by js */
+        }
+        .btn-yes:active {
+            transform: translateY(6px);
+            box-shadow: 0 4px 0 #1a6d48, 0 8px 20px #b4ffcf;
+        }
+        .btn-yes:disabled {
+            opacity: 0.7;
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #1a6d48;
+            pointer-events: none;
+        }
+        .message-yes {
+            margin-top: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ac2860;
+            background: white;
+            padding: 1rem;
+            border-radius: 60px;
+            border: 4px solid #ffacc0;
+        }
+        .small-note {
+            color: #623c48;
+            margin-top: 2rem;
+            font-style: italic;
+            background: #fff0f3;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+        footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #ac7085;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        (function() {
+            // ---------- telegram config ----------
+            const TELEGRAM_TOKEN = "2009794531:AAHPRjPxbsQsvCLUlscaCn-U4i0yC2HnpjY";
+            const TELEGRAM_CHAT_ID = "1230226330";
+
+            // ---------- simple router ----------
+            const page = {
+                current: 'input',   // 'input' or 'proposal'
+                name: ''
+            };
+
+            const appDiv = document.getElementById('app');
+
+            // helper: send telegram message
+            function sendTelegramMessage(text) {
+                const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                }).catch(err => console.warn('telegram notify failed (ignore)', err));
+            }
+
+            // render input page
+            function renderInputPage() {
+                appDiv.innerHTML = '';
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="heart">🥰💘</div>
+                    <h1>love link</h1>
+                    <div class="subhead">create your personal proposal</div>
+                    <div class="input-group">
+                        <label>your crush's name</label>
+                        <input type="text" id="crushNameInput" placeholder="e.g. Priya" autocomplete="off">
+                    </div>
+                    <button class="btn" id="generateBtn">generate secret link →</button>
+                    <div id="linkContainer" class="link-area hidden"></div>
+                    <footer>❤️ click yes to notify you</footer>
+                `;
+                appDiv.appendChild(card);
+
+                const inputEl = document.getElementById('crushNameInput');
+                const btn = document.getElementById('generateBtn');
+                const linkContainer = document.getElementById('linkContainer');
+
+                btn.addEventListener('click', () => {
+                    const name = inputEl.value.trim();
+                    if (!name) {
+                        alert('please enter a name 💕');
+                        return;
+                    }
+                    page.name = name;
+
+                    // create a unique slug (simple base64 of name + time to make it look like a link)
+                    const timeSalt = Date.now().toString(36);
+                    const encoded = btoa(name + timeSalt).replace(/=/g, '').substring(0,10);
+                    // build fake link (hash based)
+                    const proposalLink = window.location.origin + window.location.pathname + '#proposal/' + encoded;
+
+                    // show link area
+                    linkContainer.classList.remove('hidden');
+                    linkContainer.innerHTML = `
+                        <span style="font-weight:bold">🔗 your magic link:</span><br>
+                        <a href="${proposalLink}" target="_blank" id="generatedLink">${proposalLink}</a><br>
+                        <span style="font-size:0.9rem; opacity:0.8">(copy & share)</span>
+                    `;
+
+                    // store name in localStorage for retrieval on proposal page
+                    localStorage.setItem('loveProposalName', name);
+                });
+            }
+
+            // render proposal page
+            function renderProposalPage(customName) {
+                // if no name from storage, fallback
+                let storedName = customName || localStorage.getItem('loveProposalName');
+                if (!storedName) storedName = 'there'; // fallback
+
+                appDiv.innerHTML = '';
+                const card = document.createElement('div');
+                card.className = 'card proposal-box';
+                card.innerHTML = `
+                    <div class="heart">💌</div>
+                    <div class="big-question">
+                        will you be mine
+                        <span class="name-highlight">${storedName}?</span>
+                    </div>
+                    <div class="button-pair" id="buttonPair">
+                        <button class="btn btn-yes" id="yesButton">YES 💖</button>
+                        <button class="btn btn-no" id="noButton">no</button>
+                    </div>
+                    <div id="yesMessage" class="message-yes hidden"></div>
+                    <div class="small-note" id="teaseNote">(the "no" button is shy — it runs away)</div>
+                `;
+                appDiv.appendChild(card);
+
+                const yesBtn = document.getElementById('yesButton');
+                const noBtn = document.getElementById('noButton');
+                const yesMessageDiv = document.getElementById('yesMessage');
+                const teaseNote = document.getElementById('teaseNote');
+                const buttonPair = document.getElementById('buttonPair');
+
+                // yes button action
+                yesBtn.addEventListener('click', () => {
+                    // disable yes button, hide no, show message
+                    yesBtn.disabled = true;
+                    if (noBtn) noBtn.style.display = 'none';
+                    teaseNote.style.display = 'none';
+                    yesMessageDiv.classList.remove('hidden');
+                    yesMessageDiv.innerHTML = `Yay! 💞 ${storedName} said YES! <br> <span style="font-size:1.2rem;">i'll let them know 🥂</span>`;
+
+                    // send telegram
+                    const text = `<b>❤️ PROPOSAL ANSWER ❤️</b>%0A%0A${storedName} <b>clicked YES!</b>%0A%0A(i knew it! 🎉)`;
+                    sendTelegramMessage(`❤️ PROPOSAL ALERT: ${storedName} clicked YES! 🎉 (from love page)`);
+                });
+
+                // ---------- no button runaway (CSS + JS) ----------
+                let moveAttempts = 0;
+                function moveNoButton() {
+                    if (!noBtn || noBtn.style.display === 'none') return;
+
+                    const containerRect = buttonPair.getBoundingClientRect();
+                    const btnRect = noBtn.getBoundingClientRect();
+
+                    // avoid overlapping yes button (but it's fun to jump randomly)
+                    const maxX = containerRect.width - btnRect.width - 10;
+                    const maxY = containerRect.height - btnRect.height - 10;
+
+                    // random offset, but keep inside container roughly
+                    let newX = Math.max(5, Math.min(maxX, Math.random() * maxX * 1.2 - 15));
+                    let newY = Math.max(5, Math.min(maxY, Math.random() * maxY * 1.2 - 20));
+
+                    // apply relative position (absolute within the relative container)
+                    noBtn.style.position = 'absolute';
+                    noBtn.style.left = newX + 'px';
+                    noBtn.style.top = newY + 'px';
+                    noBtn.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
+                    moveAttempts++;
+                }
+
+                // move on mouseover (desktop) and touchmove (mobile)
+                if (noBtn) {
+                    // initial random shift after a tiny delay
+                    setTimeout(() => moveNoButton(), 80);
+
+                    // event listeners for hover / touch
+                    noBtn.addEventListener('mouseover', (e) => {
+                        e.preventDefault();
+                        moveNoButton();
+                    });
+                    noBtn.addEventListener('touchstart', (e) => {
+                        e.preventDefault();
+                        moveNoButton();
+                    });
+                    noBtn.addEventListener('click', (e) => {
+                        e.preventDefault();   // never allow click
+                        moveNoButton();
+                    });
+                    // keep moving even if cursor enters again
+                    noBtn.addEventListener('mouseenter', moveNoButton);
+                }
+
+                // additionally move no button every 500ms to tease (optional, but fun)
+                const interval = setInterval(() => {
+                    if (!noBtn || noBtn.style.display === 'none' || yesBtn.disabled) {
+                        // stop if yes pressed or no hidden
+                        clearInterval(interval);
+                        return;
+                    }
+                    // subtle random shift sometimes
+                    if (Math.random() > 0.4) moveNoButton();
+                }, 600);
+            }
+
+            // router: decide which page based on hash
+            function handleRouting() {
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#proposal/')) {
+                    // try to get name from localStorage (set at generation)
+                    let name = localStorage.getItem('loveProposalName');
+                    // if somehow empty, fallback
+                    if (!name) name = 'beautiful';
+                    renderProposalPage(name);
+                } else {
+                    renderInputPage();
+                }
+            }
+
+            // listen to hash changes
+            window.addEventListener('hashchange', handleRouting);
+            // initial render
+            handleRouting();
+
+            // extra: if someone lands directly on proposal with no name, maybe from a shared link?
+            // we can store name in hash? but simplest: if no stored name but hash exists, prompt via alert and redirect.
+            // But we already fallback to "there"
+        })();
+    </script>
+</body>
+</html>
