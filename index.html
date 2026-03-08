@@ -1,420 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💝 will you be mine · proposal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-        }
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #fad0c4 0%, #ffd1d1 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            transition: background 0.3s ease;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 48px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            background: linear-gradient(130deg, #d64b6b, #b32e5a);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 0.25rem;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 10px rgba(255, 120, 160, 0.2);
-        }
-        .subhead {
-            font-size: 1.2rem;
-            color: #6b3b4b;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        label {
-            font-weight: 600;
-            color: #802d4a;
-            font-size: 1.2rem;
-            letter-spacing: -0.2px;
-            text-align: left;
-            margin-left: 8px;
-        }
-        input {
-            background: rgba(255,255,240,0.8);
-            border: 2px solid #ffb3c6;
-            border-radius: 60px;
-            padding: 1rem 1.8rem;
-            font-size: 1.2rem;
-            outline: none;
-            transition: 0.15s;
-            color: #351c24;
-            font-weight: 500;
-        }
-        input:focus {
-            border-color: #ff5e8a;
-            box-shadow: 0 0 0 5px rgba(255,94,138,0.2);
-            background: #fff9fb;
-        }
-        .btn {
-            background: #ff5e8a;
-            border: none;
-            border-radius: 60px;
-            padding: 1rem 2rem;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 8px 14px #ffb0c3;
-            transition: transform 0.1s, box-shadow 0.2s;
-            border: 2px solid white;
-            letter-spacing: 0.5px;
-        }
-        .btn:active {
-            transform: scale(0.96);
-        }
-        .link-area {
-            margin-top: 1.5rem;
-            word-break: break-all;
-            background: #ffecf0;
-            padding: 1rem;
-            border-radius: 40px;
-            border: 2px dashed #ff94b2;
-        }
-        .link-area a {
-            color: #b32e5a;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-        .link-area a:hover {
-            text-decoration: underline;
-        }
-        .hidden {
-            display: none;
-        }
-        .heart {
-            font-size: 3rem;
-            line-height: 1;
-            margin-bottom: 0.25rem;
-            filter: drop-shadow(0 6px 6px #fbaaba);
-        }
-        /* proposal page specific */
-        .proposal-box {
-            text-align: center;
-        }
-        .big-question {
-            font-size: 3.2rem;
-            font-weight: 800;
-            color: #a52d55;
-            margin: 0.5rem 0 2rem 0;
-            text-shadow: 2px 2px 0 white;
-        }
-        .name-highlight {
-            background: white;
-            padding: 0.2rem 1.2rem;
-            border-radius: 100px;
-            display: inline-block;
-            box-shadow: 0 4px 0 #ffb8cf;
-            font-size: 2rem;
-            margin-top: 8px;
-        }
-        .button-pair {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin: 2.5rem 0 1rem;
-            position: relative;
-            min-height: 140px;
-        }
-        .btn-yes {
-            background: #2fb87e;
-            box-shadow: 0 10px 0 #1a6d48, 0 8px 20px #b4ffcf;
-            font-size: 2rem;
-            padding: 1rem 2.8rem;
-            border: 3px solid white;
-            transition: 0.1s;
-            z-index: 10;
-        }
-        .btn-no {
-            background: #444;
-            box-shadow: 0 10px 0 #222, 0 8px 20px #ccc;
-            font-size: 2rem;
-            padding: 1rem 2.8rem;
-            border: 3px solid #eee;
-            transition: all 0.08s ease;
-            position: relative;
-            cursor: default;
-            z-index: 20;
-            /* will be moved by js */
-        }
-        .btn-yes:active {
-            transform: translateY(6px);
-            box-shadow: 0 4px 0 #1a6d48, 0 8px 20px #b4ffcf;
-        }
-        .btn-yes:disabled {
-            opacity: 0.7;
-            transform: translateY(5px);
-            box-shadow: 0 5px 0 #1a6d48;
-            pointer-events: none;
-        }
-        .message-yes {
-            margin-top: 2rem;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ac2860;
-            background: white;
-            padding: 1rem;
-            border-radius: 60px;
-            border: 4px solid #ffacc0;
-        }
-        .small-note {
-            color: #623c48;
-            margin-top: 2rem;
-            font-style: italic;
-            background: #fff0f3;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-        }
-        footer {
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: #ac7085;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Valentine · professional proposal</title>
+  <style>
+    /* GLOBAL RESET & FONTS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 10% 30%, #fce4e4, #f9d4d9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      transition: background 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    /* CARD — GLASSMORPHISM + ELEGANCE */
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 56px;
+      padding: 2.8rem 2.2rem;
+      box-shadow: 
+        0 30px 60px rgba(190, 70, 100, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+        0 0 0 2px rgba(255, 200, 220, 0.3);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 40px 80px rgba(200, 80, 110, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(150deg, #be2e5d, #d44e78);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.2rem;
+      text-shadow: 0 6px 18px rgba(220, 80, 120, 0.25);
+    }
+
+    .subhead {
+      font-size: 1.25rem;
+      font-weight: 350;
+      color: #6b3b48;
+      margin-bottom: 2.4rem;
+    }
+
+    /* INPUT GROUP — MODERN */
+    .input-field {
+      text-align: left;
+      margin-bottom: 1.8rem;
+    }
+
+    .input-field label {
+      display: block;
+      font-weight: 550;
+      font-size: 1.1rem;
+      color: #a1355a;
+      margin-left: 0.75rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.2px;
+    }
+
+    .input-field input {
+      width: 100%;
+      background: rgba(255, 245, 245, 0.7);
+      border: 2px solid rgba(255, 150, 180, 0.4);
+      border-radius: 48px;
+      padding: 1.1rem 2rem;
+      font-size: 1.25rem;
+      font-weight: 450;
+      outline: none;
+      transition: all 0.2s ease;
+      color: #2e1b22;
+    }
+
+    .input-field input:focus {
+      border-color: #ff90b5;
+      background: #fffbfd;
+      box-shadow: 0 0 0 6px rgba(255, 120, 160, 0.2);
+    }
+
+    /* PRIMARY BUTTON */
+    .primary-btn {
+      background: #ff5e8b;
+      border: none;
+      border-radius: 60px;
+      padding: 1.1rem 2.4rem;
+      font-size: 1.5rem;
+      font-weight: 650;
+      color: white;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
+      box-shadow: 0 12px 0 #b13e60, 0 8px 24px #ffb0c8;
+      border: 2px solid #fff9fb;
+      letter-spacing: 0.3px;
+    }
+
+    .primary-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 6px 0 #b13e60, 0 8px 20px #ffa0bc;
+    }
+
+    /* LINK OUTPUT */
+    .link-output {
+      margin-top: 2rem;
+      background: #ffeef2;
+      padding: 1.4rem 1rem;
+      border-radius: 48px;
+      border: 2px dashed #ff98b7;
+      word-break: break-word;
+      transition: opacity 0.2s;
+    }
+
+    .link-output a {
+      color: #b23660;
+      font-weight: 650;
+      font-size: 1.15rem;
+      text-decoration: none;
+      border-bottom: 2px dotted #ff90b5;
+    }
+
+    .link-output a:hover {
+      border-bottom: 2px solid #ff5e8b;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* PROPOSAL PAGE SPECIFIC */
+    .proposal-name-badge {
+      background: white;
+      padding: 0.4rem 2rem;
+      border-radius: 100px;
+      display: inline-block;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #b62e5c;
+      box-shadow: 0 6px 0 #ffbfd0;
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .big-question {
+      font-size: 3.2rem;
+      font-weight: 750;
+      color: #97264f;
+      margin: 1rem 0 1.2rem;
+      text-shadow: 2px 2px 0 white;
+    }
+
+    /* BUTTON CONTAINER — needed for absolute positioning of NO */
+    .button-pair {
+      position: relative;
+      min-height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2.2rem 0 1rem;
+    }
+
+    .yes-btn {
+      background: #22b06f;
+      border: none;
+      border-radius: 80px;
+      padding: 1.2rem 3rem;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 14px 0 #166b44, 0 12px 28px #a8f0cc;
+      border: 3px solid white;
+      cursor: pointer;
+      transition: transform 0.08s, box-shadow 0.2s;
+      z-index: 10;
+      margin-right: 20px;
+    }
+
+    .yes-btn:active {
+      transform: translateY(7px);
+      box-shadow: 0 7px 0 #166b44, 0 12px 28px #a8f0cc;
+    }
+
+    .yes-btn:disabled {
+      opacity: 0.7;
+      transform: translateY(7px);
+      box-shadow: 0 7px 0 #166b44;
+      pointer-events: none;
+    }
+
+    /* THE INFAMOUS NO BUTTON — ABSOLUTELY POSITIONED, AGILE */
+    .no-btn {
+      background: #4a4a52;
+      border: none;
+      border-radius: 80px;
+      padding: 1.2rem 3rem;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 14px 0 #27242b, 0 8px 22px #bdbdbd;
+      border: 3px solid #f0f0f0;
+      cursor: pointer;
+      transition: none; /* no transition — instant teleport */
+      position: absolute;
+      left: 60%; /* initial spot, will be overridden by js */
+      top: 20px;
+      z-index: 25;
+      will-change: left, top;
+      touch-action: none; /* prevent default touch actions */
+      user-select: none;
+    }
+
+    /* message after YES */
+    .success-message {
+      background: #ffffffdd;
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #b22d58;
+      border: 4px solid #ffb6d0;
+      margin-top: 2rem;
+    }
+
+    .footnote {
+      margin-top: 2rem;
+      color: #8f5068;
+      font-weight: 400;
+      background: #fff0f5cc;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    hr {
+      border: 1px solid #ffc1d2;
+      margin: 1.6rem 0 0.8rem;
+      width: 80px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* mobile fine-tune */
+    @media (max-width: 480px) {
+      .card { padding: 2rem 1.2rem; border-radius: 40px; }
+      h1 { font-size: 2.4rem; }
+      .big-question { font-size: 2.5rem; }
+      .yes-btn { font-size: 1.8rem; padding: 1rem 2rem; }
+      .no-btn { font-size: 1.8rem; padding: 1rem 2rem; }
+    }
+  </style>
 </head>
 <body>
-    <div id="app"></div>
+  <div id="root"></div>
 
-    <script>
-        (function() {
-            // ---------- telegram config ----------
-            const TELEGRAM_TOKEN = "2009794531:AAHPRjPxbsQsvCLUlscaCn-U4i0yC2HnpjY";
-            const TELEGRAM_CHAT_ID = "1230226330";
+  <script>
+    (function() {
+      // ---------- CONFIG (telegram) ----------
+      const TELEGRAM_TOKEN = "2009794531:AAHPRjPxbsQsvCLUlscaCn-U4i0yC2HnpjY";
+      const TELEGRAM_CHAT_ID = "1230226330";
 
-            // ---------- simple router ----------
-            const page = {
-                current: 'input',   // 'input' or 'proposal'
-                name: ''
-            };
+      // ---------- STATE ----------
+      let currentPage = 'input';    // 'input' or 'proposal'
+      let crushName = '';
 
-            const appDiv = document.getElementById('app');
+      // ---------- HELPER: send telegram ----------
+      function notifyTelegram(answerName) {
+        const text = `❤️ <b>PROPOSAL ANSWER</b> ❤️%0A%0A${answerName} clicked <b>YES</b>! %0A%0A(telegram alert from professional proposal)`;
+        const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: `❤️ PROPOSAL from ${answerName} — YES clicked!`,
+            parse_mode: 'HTML'
+          })
+        }).catch(err => console.warn('telegram issue (non-blocking)', err));
+      }
 
-            // helper: send telegram message
-            function sendTelegramMessage(text) {
-                const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-                fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: text,
-                        parse_mode: 'HTML'
-                    })
-                }).catch(err => console.warn('telegram notify failed (ignore)', err));
+      // ---------- RENDER INPUT PAGE ----------
+      function renderInputPage() {
+        const root = document.getElementById('root');
+        root.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h1>✨ link & propose</h1>
+          <div class="subhead">craft a personal moment</div>
+          <div class="input-field">
+            <label>enter their name</label>
+            <input type="text" id="crushNameInput" placeholder="Jamie / Priya ..." autocomplete="off" value="">
+          </div>
+          <button class="primary-btn" id="generateBtn">generate secret link →</button>
+          <div id="linkBox" class="link-output hidden"></div>
+          <hr>
+          <div class="footnote">💘 only yes notifies you — no button will flee</div>
+        `;
+        root.appendChild(card);
+
+        const inputEl = document.getElementById('crushNameInput');
+        const genBtn = document.getElementById('generateBtn');
+        const linkBox = document.getElementById('linkBox');
+
+        genBtn.addEventListener('click', () => {
+          const name = inputEl.value.trim();
+          if (!name) {
+            alert('please enter a name (it’s polite)');
+            return;
+          }
+          crushName = name;
+          // store in sessionStorage for proposal (professional)
+          sessionStorage.setItem('valentineName', name);
+
+          // create unique hash (just for show)
+          const rand = Math.random().toString(36).substring(2, 10);
+          const proposalHash = `#proposal-${rand}`;
+          const fullLink = window.location.origin + window.location.pathname + proposalHash;
+
+          linkBox.classList.remove('hidden');
+          linkBox.innerHTML = `
+            <span style="font-weight:600; opacity:0.8;">🔗 share this secret link:</span><br>
+            <a href="${fullLink}" target="_blank">${fullLink}</a>
+          `;
+
+          // change hash without reload (so input page stays, but we can also navigate)
+          window.location.hash = proposalHash;
+          // but we STAY on input page, until hash changes. That's fine: user can copy, then click link.
+          // However we want to show proposal when hash detected. So we need routing.
+        });
+      }
+
+      // ---------- RENDER PROPOSAL PAGE (with given name) ----------
+      function renderProposalPage(displayName) {
+        const root = document.getElementById('root');
+        root.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h1>💖 will you be mine</h1>
+          <div class="proposal-name-badge">${displayName}</div>
+          <div class="button-pair" id="buttonPair">
+            <button class="yes-btn" id="yesBtn">YES</button>
+            <button class="no-btn" id="noBtn">no</button>
+          </div>
+          <div id="postYesMessage" class="success-message hidden"></div>
+          <div class="footnote" id="noHint">the no button runs away — you can only choose yes</div>
+        `;
+        root.appendChild(card);
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const postYesDiv = document.getElementById('postYesMessage');
+        const hintEl = document.getElementById('noHint');
+        const container = document.getElementById('buttonPair');
+
+        // ---------- PROFESSIONAL NO-BUTTON EVASION ----------
+        // it moves ONLY when user tries to click (mouse down / touch start / click)
+        // teleports far away randomly within container, but respecting boundaries
+
+        function getContainerRect() {
+          return container.getBoundingClientRect();
+        }
+
+        function getNoButtonRect() {
+          return noBtn.getBoundingClientRect();
+        }
+
+        // teleport no button to a random far position (minimum 150px away from previous)
+        function teleportNoButton(ev) {
+          if (!noBtn || noBtn.style.display === 'none') return;
+
+          // Prevent any default action on the no button
+          ev?.preventDefault();
+          ev?.stopPropagation();
+
+          const containerRect = container.getBoundingClientRect();
+          const btnRect = noBtn.getBoundingClientRect();
+
+          // button width/height including margin? we use offsetWidth
+          const btnW = noBtn.offsetWidth;
+          const btnH = noBtn.offsetHeight;
+
+          // available area (with 5px margin)
+          const maxLeft = containerRect.width - btnW - 10;
+          const maxTop = containerRect.height - btnH - 10;
+
+          if (maxLeft <= 20 || maxTop <= 20) {
+            // fallback: move near edges but still inside
+            noBtn.style.left = '10px';
+            noBtn.style.top = '10px';
+            return;
+          }
+
+          // Current absolute position (left, top relative to container)
+          const currentLeft = parseFloat(noBtn.style.left) || (containerRect.width * 0.6);
+          const currentTop = parseFloat(noBtn.style.top) || 20;
+
+          // generate new random coordinates, but enforce a distance > 150px (far away)
+          let newLeft, newTop;
+          let attempts = 0;
+          const minDistance = 160; // far enough
+
+          do {
+            newLeft = 10 + Math.random() * (maxLeft - 10);
+            newTop = 10 + Math.random() * (maxTop - 10);
+            attempts++;
+            if (attempts > 200) {
+              // if impossible, just random
+              break;
             }
+          } while (Math.hypot(newLeft - currentLeft, newTop - currentTop) < minDistance && attempts < 300);
 
-            // render input page
-            function renderInputPage() {
-                appDiv.innerHTML = '';
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="heart">🥰💘</div>
-                    <h1>love link</h1>
-                    <div class="subhead">create your personal proposal</div>
-                    <div class="input-group">
-                        <label>your crush's name</label>
-                        <input type="text" id="crushNameInput" placeholder="e.g. Priya" autocomplete="off">
-                    </div>
-                    <button class="btn" id="generateBtn">generate secret link →</button>
-                    <div id="linkContainer" class="link-area hidden"></div>
-                    <footer>❤️ click yes to notify you</footer>
-                `;
-                appDiv.appendChild(card);
+          // apply new positions (absolute within container)
+          noBtn.style.left = newLeft + 'px';
+          noBtn.style.top = newTop + 'px';
+          noBtn.style.transform = `rotate(${Math.random() * 3 - 1.5}deg)`; // tiny tilt
+        }
 
-                const inputEl = document.getElementById('crushNameInput');
-                const btn = document.getElementById('generateBtn');
-                const linkContainer = document.getElementById('linkContainer');
+        // set initial no button position (right side, but not too extreme)
+        if (noBtn) {
+          const containerRect = container.getBoundingClientRect();
+          noBtn.style.position = 'absolute';
+          noBtn.style.left = (containerRect.width * 0.55) + 'px';
+          noBtn.style.top = '20px';
+        }
 
-                btn.addEventListener('click', () => {
-                    const name = inputEl.value.trim();
-                    if (!name) {
-                        alert('please enter a name 💕');
-                        return;
-                    }
-                    page.name = name;
-
-                    // create a unique slug (simple base64 of name + time to make it look like a link)
-                    const timeSalt = Date.now().toString(36);
-                    const encoded = btoa(name + timeSalt).replace(/=/g, '').substring(0,10);
-                    // build fake link (hash based)
-                    const proposalLink = window.location.origin + window.location.pathname + '#proposal/' + encoded;
-
-                    // show link area
-                    linkContainer.classList.remove('hidden');
-                    linkContainer.innerHTML = `
-                        <span style="font-weight:bold">🔗 your magic link:</span><br>
-                        <a href="${proposalLink}" target="_blank" id="generatedLink">${proposalLink}</a><br>
-                        <span style="font-size:0.9rem; opacity:0.8">(copy & share)</span>
-                    `;
-
-                    // store name in localStorage for retrieval on proposal page
-                    localStorage.setItem('loveProposalName', name);
-                });
+        // attach event listeners to the no button for any interaction that tries to click it
+        if (noBtn) {
+          // mousedown / touchstart — the moment user INTENDS to click
+          noBtn.addEventListener('mousedown', teleportNoButton);
+          noBtn.addEventListener('touchstart', teleportNoButton, { passive: false });
+          noBtn.addEventListener('click', (e) => {
+            e.preventDefault();  // never ever click
+            teleportNoButton(e);
+          });
+          // also on mouseenter? no, only when they try to click. but we also add a safety for mouseup? not needed.
+          // for extra paranoia on mobile, add pointerdown
+          noBtn.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch' || e.pointerType === 'mouse') {
+              teleportNoButton(e);
             }
+          });
+        }
 
-            // render proposal page
-            function renderProposalPage(customName) {
-                // if no name from storage, fallback
-                let storedName = customName || localStorage.getItem('loveProposalName');
-                if (!storedName) storedName = 'there'; // fallback
+        // yes button logic
+        yesBtn.addEventListener('click', () => {
+          // disable yes and hide no, show message
+          yesBtn.disabled = true;
+          noBtn.style.display = 'none';
+          hintEl.style.display = 'none';
+          postYesDiv.classList.remove('hidden');
+          postYesDiv.innerHTML = `💞 YAY! ${displayName} said YES! <br> <span style="font-size:1.5rem;">❤️ notification sent</span>`;
 
-                appDiv.innerHTML = '';
-                const card = document.createElement('div');
-                card.className = 'card proposal-box';
-                card.innerHTML = `
-                    <div class="heart">💌</div>
-                    <div class="big-question">
-                        will you be mine
-                        <span class="name-highlight">${storedName}?</span>
-                    </div>
-                    <div class="button-pair" id="buttonPair">
-                        <button class="btn btn-yes" id="yesButton">YES 💖</button>
-                        <button class="btn btn-no" id="noButton">no</button>
-                    </div>
-                    <div id="yesMessage" class="message-yes hidden"></div>
-                    <div class="small-note" id="teaseNote">(the "no" button is shy — it runs away)</div>
-                `;
-                appDiv.appendChild(card);
+          // inform telegram
+          notifyTelegram(displayName);
+        });
 
-                const yesBtn = document.getElementById('yesButton');
-                const noBtn = document.getElementById('noButton');
-                const yesMessageDiv = document.getElementById('yesMessage');
-                const teaseNote = document.getElementById('teaseNote');
-                const buttonPair = document.getElementById('buttonPair');
+        // also ensure no button never gets hover triggered to move — we only move on mousedown/click
+        // we do NOT move on mouseover, only on explicit attempt
+      }
 
-                // yes button action
-                yesBtn.addEventListener('click', () => {
-                    // disable yes button, hide no, show message
-                    yesBtn.disabled = true;
-                    if (noBtn) noBtn.style.display = 'none';
-                    teaseNote.style.display = 'none';
-                    yesMessageDiv.classList.remove('hidden');
-                    yesMessageDiv.innerHTML = `Yay! 💞 ${storedName} said YES! <br> <span style="font-size:1.2rem;">i'll let them know 🥂</span>`;
+      // ---------- ROUTING based on hash ----------
+      function route() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#proposal-')) {
+          // proposal page
+          let storedName = sessionStorage.getItem('valentineName');
+          if (!storedName) {
+            // fallback — if they open link directly, ask name gently?
+            storedName = prompt('enter the name for this proposal:') || 'beautiful';
+            if (storedName) sessionStorage.setItem('valentineName', storedName);
+          }
+          currentPage = 'proposal';
+          renderProposalPage(storedName);
+        } else {
+          // input page
+          currentPage = 'input';
+          renderInputPage();
+        }
+      }
 
-                    // send telegram
-                    const text = `<b>❤️ PROPOSAL ANSWER ❤️</b>%0A%0A${storedName} <b>clicked YES!</b>%0A%0A(i knew it! 🎉)`;
-                    sendTelegramMessage(`❤️ PROPOSAL ALERT: ${storedName} clicked YES! 🎉 (from love page)`);
-                });
+      // listen to hash changes
+      window.addEventListener('hashchange', route);
+      // initial load
+      route();
 
-                // ---------- no button runaway (CSS + JS) ----------
-                let moveAttempts = 0;
-                function moveNoButton() {
-                    if (!noBtn || noBtn.style.display === 'none') return;
+      // handle page load with no hash but maybe we want to clear old hash?
+      // ensure that if someone lands on proposal with no name, we have fallback
+      window.addEventListener('load', () => {
+        if (window.location.hash && window.location.hash.startsWith('#proposal-')) {
+          if (!sessionStorage.getItem('valentineName')) {
+            const nameFromPrompt = prompt('this link is special. enter the name:') || 'darling';
+            sessionStorage.setItem('valentineName', nameFromPrompt);
+          }
+          route(); // re-run
+        }
+      });
 
-                    const containerRect = buttonPair.getBoundingClientRect();
-                    const btnRect = noBtn.getBoundingClientRect();
-
-                    // avoid overlapping yes button (but it's fun to jump randomly)
-                    const maxX = containerRect.width - btnRect.width - 10;
-                    const maxY = containerRect.height - btnRect.height - 10;
-
-                    // random offset, but keep inside container roughly
-                    let newX = Math.max(5, Math.min(maxX, Math.random() * maxX * 1.2 - 15));
-                    let newY = Math.max(5, Math.min(maxY, Math.random() * maxY * 1.2 - 20));
-
-                    // apply relative position (absolute within the relative container)
-                    noBtn.style.position = 'absolute';
-                    noBtn.style.left = newX + 'px';
-                    noBtn.style.top = newY + 'px';
-                    noBtn.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
-                    moveAttempts++;
-                }
-
-                // move on mouseover (desktop) and touchmove (mobile)
-                if (noBtn) {
-                    // initial random shift after a tiny delay
-                    setTimeout(() => moveNoButton(), 80);
-
-                    // event listeners for hover / touch
-                    noBtn.addEventListener('mouseover', (e) => {
-                        e.preventDefault();
-                        moveNoButton();
-                    });
-                    noBtn.addEventListener('touchstart', (e) => {
-                        e.preventDefault();
-                        moveNoButton();
-                    });
-                    noBtn.addEventListener('click', (e) => {
-                        e.preventDefault();   // never allow click
-                        moveNoButton();
-                    });
-                    // keep moving even if cursor enters again
-                    noBtn.addEventListener('mouseenter', moveNoButton);
-                }
-
-                // additionally move no button every 500ms to tease (optional, but fun)
-                const interval = setInterval(() => {
-                    if (!noBtn || noBtn.style.display === 'none' || yesBtn.disabled) {
-                        // stop if yes pressed or no hidden
-                        clearInterval(interval);
-                        return;
-                    }
-                    // subtle random shift sometimes
-                    if (Math.random() > 0.4) moveNoButton();
-                }, 600);
-            }
-
-            // router: decide which page based on hash
-            function handleRouting() {
-                const hash = window.location.hash;
-                if (hash && hash.startsWith('#proposal/')) {
-                    // try to get name from localStorage (set at generation)
-                    let name = localStorage.getItem('loveProposalName');
-                    // if somehow empty, fallback
-                    if (!name) name = 'beautiful';
-                    renderProposalPage(name);
-                } else {
-                    renderInputPage();
-                }
-            }
-
-            // listen to hash changes
-            window.addEventListener('hashchange', handleRouting);
-            // initial render
-            handleRouting();
-
-            // extra: if someone lands directly on proposal with no name, maybe from a shared link?
-            // we can store name in hash? but simplest: if no stored name but hash exists, prompt via alert and redirect.
-            // But we already fallback to "there"
-        })();
-    </script>
+    })();
+  </script>
 </body>
 </html>
